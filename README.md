@@ -20,6 +20,8 @@ chmod 700 /home/agent/codex-snapshot-linux-amd64
 
 程序不接受参数。成功后输出 `FILE=`、`BYTES=`、与 `sha256sum` 兼容的校验行，以及 `PASSWORD=`。**请立即把密码和 SHA-256 值分别保存在快照文件以外的安全位置**；密码只在这次运行的标准输出中出现。如果标准输出被日志系统记录，密码也会进入日志。
 
+如果希望自动下载已发布的 Linux x86_64 程序并立即运行，可在目标机器上使用 [`run-linux-amd64.sh`](run-linux-amd64.sh)。它固定下载 `v0.1.0`，先核对内置的 SHA-256 值，再执行二进制文件；不需要手动设置执行权限。脚本要求 `/home/agent/.codex` 和 `/home/agent/workspace` 已存在。
+
 输出文件权限为 `0600`。如果 `.codex` 或 `workspace` 不存在、读取文件失败，程序退出并删除未完成的临时文件。缺失的 `.bash_history` 会跳过；socket、FIFO 等特殊文件会跳过并在标准错误输出说明。符号链接会作为链接归档，不会跟随链接去读取外部路径。
 
 ## 解密和查看
